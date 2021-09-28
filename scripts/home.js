@@ -1,7 +1,10 @@
-////// API KEY: 
-let apiKey = "QEiNwRIV3GcWQ83yvX6IVcIAST0hxr1n";
 
-//traigo los elementos a usar
+
+//-----------------------------------------------//
+let apiKey = "3TLFwkYY15OWVTzFkR6qwsEkd3OqtGPZ";
+//-----------------------------------------------//
+
+///->VARIABLES<-//
 let inputBuscador = document.getElementById('input-buscador');
 let bloqueBuscador = document.getElementById('buscador');
 let iconBuscar = document.getElementById('buscador-lupa');
@@ -17,22 +20,21 @@ let busqueda;
 
 let modalMobile = document.createElement("div");
 let modalDesktop = document.createElement("div");
-
-// BUSCADOR
-// cuando se agranda el div y se muestran sugerencias:
+//-----------------------------------------------------------------------------------//
+//-> BUSCADOR
 inputBuscador.addEventListener('keyup', buscadorActivo);
 
 function buscadorActivo() {
     busqueda = inputBuscador.value;
-
-    //agrego las clases del buscador activo
+    
+    //-> AGREGO LAS CLASES DEL BUSCADOR
     bloqueBuscador.classList.remove('buscador');
     bloqueBuscador.classList.add('buscador-activo');
     iconBuscar.style.display = "none";
     btnCerrarBusqueda.style.display = "block";
-
-    //agrego la funcion de traer sugerencias y reemplazarlas en los elementos
-    if (busqueda.length >= 1) {
+    
+    //-> AGREGO LA FUNCION DE TRAER SUGERENCIAS Y REEMPLAZARLAS EN LOS ELEMENTOS
+        if (busqueda.length >= 1) {
         fetch(`https://api.giphy.com/v1/tags/related/${busqueda}?api_key=${apiKey}&limit=4`)
             .then(response => response.json())
             .then(data => {
@@ -42,11 +44,13 @@ function buscadorActivo() {
                 console.error("error al traer sugerencias de busqueda", err);
             })
     } else {
-        //funcion para cerrar el buscador cuando se borra todo
+
+
         cerrarBoxBusqueda();
+
     }
 }
-
+//-----------------------------------------------------------------------------------//
 
 
 function sugerenciasData(data) {
@@ -74,17 +78,22 @@ function sugerenciasData(data) {
     </li>`;
 }
 
-//funcion sugerencias: cuando se clickea una, se hace la busqueda de ese termino
+//-----------------------------------------------------------------------------------//
+
+//-> CUANDO SE HACE CLICK EN UNA SUGERENCIA SE HACE LA BUSQUEDA 
 listaSugerencias.addEventListener('click', function (li) {
     inputBuscador.value = li.target.textContent;
     busquedaGifos();
 })
 
-//cuando cierro la busqueda:
+//-----------------------------------------------------------------------------------//
+
+
+//-> CIERRO LA BUSQUEDA:
 btnCerrarBusqueda.addEventListener('click', limpiarBusqueda);
 
 function limpiarBusqueda() {
-    //vacío el input y devuelvo las clases del contenedor a como estaban
+    //funcion para vaciar el input y volver las clases del contenedor a como estaban
     inputBuscador.value = "";
     inputBuscador.placeholder = "Busca GIFOS y más";
     bloqueBuscador.classList.add('buscador');
@@ -93,7 +102,10 @@ function limpiarBusqueda() {
     btnCerrarBusqueda.style.display = "none";
 }
 
-//hago la busqueda al clickear lupa gris, o apretar enter
+//-----------------------------------------------------------------------------------//
+
+
+//-> CUANDO HAGO CLICK EN LA LUPA GRIS O APRETO ENTER HAGO LA BUSQUEDA
 btnBuscar.addEventListener('click', busquedaGifos);
 inputBuscador.addEventListener('keyup', function (e) {
     if (e.keyCode === 13) {
@@ -101,25 +113,24 @@ inputBuscador.addEventListener('keyup', function (e) {
     }
 });
 
+//--------------------------------------------------------------------------------------------------------------------//
+//-> RESULTADOS DE LA BUSQUEDA TRAIDOS DESDE LA API
 
-//Resultados de la busqueda: aparecen los primeros resultados traidos de la API
 function busquedaGifos() {
     event.preventDefault();
     let urlBusqueda = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&limit=12&offset=${offsetBusqueda}&q=`;
     let strBusqueda = inputBuscador.value.trim();
     urlBusqueda = urlBusqueda.concat(strBusqueda);
-    //console.log(urlBusqueda);
 
     fetch(urlBusqueda)
         .then(response => response.json())
         .then(content => {
             resultadosBusquedaGIFOS.innerHTML = "";
-            //console.log(content.data);
-            //aparece el div con el titulo y resultados
+            //SE MUESTRA EL DIV CON EL TITULO Y LOS RESULTADOS
             let contenedorResultadosBusqueda = document.getElementById('resultados-busqueda-contenedor');
             contenedorResultadosBusqueda.style.display = "block";
 
-            //agrego el titulo de la busqueda
+            //AGREGO TITULO DE LA BUSQUEDA
             let tituloBusqueda = document.getElementById('titulo-busqueda');
             tituloBusqueda.innerHTML = inputBuscador.value;
 
@@ -143,7 +154,7 @@ function busquedaGifos() {
 
     cerrarBoxBusqueda();
 }
-
+//-----------------------------------------------------------------------------------------------------------------------------//
 
 function traerBusqueda(content) {
     resultadosBusquedaGIFOS.innerHTML += `
@@ -170,10 +181,10 @@ function traerBusqueda(content) {
                 `;
 }
 
-
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
 function cerrarBoxBusqueda() {
-    //achico el contenedor de la busqueda
+    //DISMINUYO EL CONTAINER DE LA BUSQUEDA
     bloqueBuscador.classList.add('buscador');
     bloqueBuscador.classList.remove('buscador-activo');
     iconBuscar.style.display = "block";
@@ -181,7 +192,7 @@ function cerrarBoxBusqueda() {
 }
 
 
-//3. Boton Ver mas: cuando se apreta, se cargan mas resultados
+//3.-> Boton Ver mas: CUANDO SE APRIETA, SE CARGAN MAS RESULTADOS
 btnVerMasResultados.addEventListener('click', verMasResultados);
 
 function verMasResultados() {
@@ -224,11 +235,15 @@ function busquedaGifosVerMas() {
             console.log("error busqueda ver mas" + error)
         })
 }
+//-----------------------------------------------------------------------------------------------------------------------------//
 
 
-// TRENDING TOPICS
-//1. traigo los 5 primer trending topics de la API
-//2. reemplazo el texto con los resultados
+  //----------------//
+ //TRENDING TOPICS//
+//--------------//
+
+
+//1->  PRIMEROS 5 TRENDING TOPICS
 let trendingTopicsTexto = document.getElementById('trending-topics');
 window.onload = trendingTopics();
 
@@ -238,9 +253,7 @@ function trendingTopics() {
     return fetch(url)
         .then(resp => resp.json()) //me trae el json con los trending topics
         .then(content => {
-            //object with data & meta
             let topics = content.data;
-            //console.log("Trending Topics", topics);
             trendingTopicsTexto.innerHTML = `<span class="trending-topics-link">${topics[0]}</span>, <span class="trending-topics-link">${topics[1]}</span>, <span class="trending-topics-link">${topics[2]}</span>, <span class="trending-topics-link">${topics[3]}</span>, <span class="trending-topics-link">${topics[4]}</span>`;
 
             let topicBtn = document.getElementsByClassName('trending-topics-link');
@@ -256,8 +269,9 @@ function trendingTopics() {
         })
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------//
 
-//FUNCIONES ACCIONES GIF:
+//-> FUNCIONES ACCIONES GIF:
 
 //FAVORITOS
 function agregarFavoritoBusqueda(gif){
@@ -269,30 +283,35 @@ function agregarFavoritoBusqueda(gif){
 crearArchivoAudioAsync
 function agregarFavorito(gif) {
 
-    //si en el local storage no hay nada, el array queda vacio
+    //-> SI EN EL LS NO HAY NADA, EL ARRAY QUEDA VACIO//
+
     if (favoritosString == null) {
         favoritosArray = [];
 
     } else {
-        //si tengo contenido, necesito parsearlo para poder agregar uno nuevo independiente
         favoritosArray = JSON.parse(favoritosString);
     }
 
     favoritosArray.push(gif);
-    //vuelvo a pasar a texto el array para subirlo al localStorage
+    //-> Vuelvo a pasar a texto el array para subirlo al localStorage
+
     favoritosString = JSON.stringify(favoritosArray);
     localStorage.setItem("gifosFavoritos", favoritosString);
 }
+//-----------------------------------------------------------------------------------------------------------------------------//
 
 
-//DESCARGAR GIF
+//-> DESCARGAR GIF
+
+
 async function descargarGif(gifImg, gifNombre) {
     let blob = await fetch(gifImg).then(img => img.blob());;
     invokeSaveAsDialog(blob, gifNombre + ".gif");
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------//
 
-//MAXIMIZAR GIF MOBILE mobile
+//-> GIF MOBILE 
 function maxGifMobile(img, id, slug, user, title) {
     if (window.matchMedia("(max-width: 1023px)").matches) {
         modalMobile.style.display = "block";
@@ -315,10 +334,12 @@ function maxGifMobile(img, id, slug, user, title) {
         document.body.appendChild(modalMobile);
     }
 }
+//-----------------------------------------------------------------------------------------------------------------------------//
 
 function cerrarModalMobile() {
     modalMobile.style.display = "none";
 } 
+//-----------------------------------------------------------------------------------------------------------------------------//
 
 function agregarFavoritoMaxMobile(gif){
 
@@ -328,8 +349,9 @@ function agregarFavoritoMaxMobile(gif){
     agregarFavorito(gif);
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------//
 
-//MAXIMIZAR GIF DESKTOP
+//-> GIF DESKTOP
 function maxGifDesktop(img, id, slug, user, title){
     if (window.matchMedia("(min-width: 1023px)").matches){
         modalDesktop.style.display = "block";
@@ -352,10 +374,12 @@ function maxGifDesktop(img, id, slug, user, title){
         document.body.appendChild(modalDesktop);
     }
 }
+//-----------------------------------------------------------------------------------------------------------------------------//
 
 function cerrarModalDesktop() {
     modalDesktop.style.display = "none";
 } 
+//-----------------------------------------------------------------------------------------------------------------------------//
 
 function agregarFavoritoMax(gif){
 
@@ -364,3 +388,4 @@ function agregarFavoritoMax(gif){
 
     agregarFavorito(gif);
 }
+//-----------------------------------------------------------------------------------------------------------------------------//

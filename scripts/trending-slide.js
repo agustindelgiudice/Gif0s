@@ -1,9 +1,10 @@
-////// API KEY: 
-apiKey = "QEiNwRIV3GcWQ83yvX6IVcIAST0hxr1n";
+//-----------------------------------------//
+apiKey = "3TLFwkYY15OWVTzFkR6qwsEkd3OqtGPZ";
+//-----------------------------------------//
 
-// TRENDING GIFOS
-//1. Traigo el array con trending gifos
-//2. reemplazo los gifos mostrados con el contenido del array
+//-----------------//
+// TRENDING GIFOS  //
+//-----------------//
 
 let sliderTrendingGifos = document.getElementById('trending-slider');
 trendingGifos();
@@ -12,9 +13,8 @@ function trendingGifos() {
     let url = `https://api.giphy.com/v1/gifs/trending?api_key=${apiKey}&limit=8`;
 
     fetch(url)
-        .then(resp => resp.json()) //me trae el json con los 4 trending gifos
+        .then(resp => resp.json()) //TRAE EL JSON CON LOS 4 TRENDING GIFOS
         .then(content => {
-            //object with data, pagination, meta
             let trendingGifArray = content.data;
 
             let trendingGIFOhtml = "";
@@ -54,15 +54,17 @@ function trendingGifos() {
 }
 
 
-//funciones para slide desktop
-//let numberOfImg = document.querySelectorAll('.gif-contenedor').length;
+//->SLIDER DESKTOP<-//
+
 let imageIndex = 1;
 let translateX = 0;
 
 let trendingBtnPrev = document.getElementById('trending-btn-previous');
 let trendingBtnNext = document.getElementById('trending-btn-next');
+//---------------------------------------------------------------------//
 
 trendingBtnNext.addEventListener('click', sliderNext);
+
 function sliderNext() {
     if (window.matchMedia("(min-width: 1440px)").matches) {
         if (imageIndex <= 5) {
@@ -78,8 +80,10 @@ function sliderNext() {
         }
     }
 }
-
+//-----------------------------------------------------------------------------//
 trendingBtnPrev.addEventListener('click', sliderPrev);
+
+
 function sliderPrev() {
     if (window.matchMedia("(min-width: 1440px)").matches) {
         if (imageIndex !== 1) {
@@ -96,9 +100,8 @@ function sliderPrev() {
     }
 }
 
-
-//ACCIONES TARJETAS
-//MODAL MAX
+//-----------------------------------------------------------------------------//
+//-> MODAL MAX
 modalMobile = document.createElement("div");
 modalDesktop = document.createElement("div");
 
@@ -124,11 +127,11 @@ function maxGifMobileTrending(img, id, slug, user, title) {
         document.body.appendChild(modalMobile);
     }
 }
-
+//-----------------------------------------------------------------------------//
 function cerrarModalMobile() {
     modalMobile.style.display = "none";
 }
-
+//-----------------------------------------------------------------------------//
 function agregarFavoritoMaxMobileTrending(gif) {
 
     let iconFavMaxMobile = document.getElementById('icon-fav-max-mob-trending-' + gif);
@@ -136,7 +139,7 @@ function agregarFavoritoMaxMobileTrending(gif) {
 
     agregarFavoritoTrendingGral(gif);
 }
-
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------//
 function maxGifDesktopTrending(img, id, slug, user, title) {
     if (window.matchMedia("(min-width: 1023px)").matches) {
         modalDesktop.style.display = "block";
@@ -159,23 +162,23 @@ function maxGifDesktopTrending(img, id, slug, user, title) {
         document.body.appendChild(modalDesktop);
     }
 }
-
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------//
 function cerrarModalDesktop() {
     modalDesktop.style.display = "none";
 }
-
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------//
 function agregarFavoritoMax(gif) {
     let iconFavMax = document.getElementById('icon-fav-max-' + gif);
     iconFavMax.setAttribute("src", "./assets/icon-fav-active.svg");
     agregarFavoritoTrendingGral(gif);
 }
-
-// FAVORITOS
+//-----------------------------------------------------------------------------//
+//-> FAVORITOS
 favoritosArray = [];
 favoritosString = localStorage.getItem("gifosFavoritos");
 
 function agregarFavoritoTrending(gif) {
-    //cambio el icono del corazon
+    //CAMBIO EL ICONO DEL CORAZÓN
     let iconFav = document.getElementById('icon-fav-trending-' + gif);
     iconFav.setAttribute("src", "./assets/icon-fav-active.svg");
 
@@ -184,26 +187,24 @@ function agregarFavoritoTrending(gif) {
 }
 
 function agregarFavoritoTrendingGral(gif) {
-    //si en el local storage no hay nada, el array queda vacio
+    //-> SI EN EL LS NO HAY NADA, EL ARRAY QUEDA VACIO//
     if (favoritosString == null) {
         favoritosArray = [];
 
     } else {
-        //si tengo contenido, necesito parsearlo para poder agregar uno nuevo independiente
         favoritosArray = JSON.parse(favoritosString);
     }
 
     favoritosArray.push(gif);
-    //vuelvo a pasar a texto el array para subirlo al localStorage
+    //PARA SUBIRLO AL LS TENGO QUE PASAR A TEXTO EL ARRAY
     favoritosString = JSON.stringify(favoritosArray);
     localStorage.setItem("gifosFavoritos", favoritosString);
-   
+
 }
 
 
-//DESCARGAR
+//-> DESCARGAR
 async function descargarGifTrending(gifImg, gifNombre) {
     let blob = await fetch(gifImg).then(img => img.blob());
     invokeSaveAsDialog(blob, gifNombre + ".gif");
 }
-

@@ -1,6 +1,8 @@
-////// API KEY: 
-apiKey = "QEiNwRIV3GcWQ83yvX6IVcIAST0hxr1n";
+//------------------------------------------//
+apiKey = "3TLFwkYY15OWVTzFkR6qwsEkd3OqtGPZ";
+//------------------------------------------//
 
+//->VARIABLES<-//
 let pantallaFavoritos = document.getElementById('resultados-favoritos');
 
 let favoritosArray = [];
@@ -10,26 +12,23 @@ let modalMobileFav = document.createElement("div");
 let modalDesktopFav = document.createElement("div");
 
 let urlActual = window.location.pathname;
+//--------------------------------------------------------------------------------------------------------------------------//
 
-/* if (urlActual ==="/gifos/favoritos.html" || urlActual==="/favoritos.html") {
-    //solo corre la funcion si estoy en la pagina de favoritos
-    buscarFavoritos();
-} */
+//-> FUNCIONES PARA MOSTRAR LOS FAVORITOS EN LA PAGINA
 
 buscarFavoritos();
 
-//funciones para mostrar los favoritos en la pagina
 function buscarFavoritos() {
     let pantallaFavoritosVacio = document.getElementById('favoritos-vacio');
 
     if (favoritosString == null || favoritosString == "[]") {
-        //1. si no tengo favoritos, muestro la pantalla favoritos vacia
+        //1- FAVORITOS: muestro la pantalla vacia si no tengo favoritos
         pantallaFavoritosVacio.style.display = "block";
         pantallaFavoritos.style.display = "none";
 
     } else {
         favoritosArray = JSON.parse(favoritosString);
-        //console.log(favoritosArray);
+        //console.log(favoritosArray); // se muestra el array con los favoritos
         let urlFavoritos = `https://api.giphy.com/v1/gifs?ids=${favoritosArray.toString()}&api_key=${apiKey}`;
 
         fetch(urlFavoritos)
@@ -42,6 +41,8 @@ function buscarFavoritos() {
             })
     }
 }
+
+//--------------------------------------------------------------------------------------------------------------------------//
 
 function mostrarFavoritos(content) {
     let gifosFavoritosArray = content.data;
@@ -72,35 +73,38 @@ function mostrarFavoritos(content) {
     }
 }
 
-//FUNCION BORRAR FAV
+//--------------------------------------------------------------------------------------------------------------------------//
+
+//-> FUNCION BORRAR FAV
 function borrarFav(gif){
     let arrayAux = [];
     arrayAux = JSON.parse(favoritosString);
     let indice = arrayAux.indexOf(gif);
-    //console.log(arrayAux);
-    //console.log(indice);
 
     arrayAux.splice(indice, 1);
 
     let nuevoFavoritosString = JSON.stringify(arrayAux);
     localStorage.setItem("gifosFavoritos", nuevoFavoritosString);
-    //console.log(favoritosString);
 
-    //cambio icono
+    //CAMBIO ICONO
     let iconFavBorrar = document.getElementById('icon-borrar-fav-' + gif);
     iconFavBorrar.setAttribute("src", "./assets/icon-fav-hover.svg");
 
-    //refresco pag
+    //REFRESCAR PAGINA
     location.reload();
 }
 
-//FUNCION DESCARGAR GIF
+//--------------------------------------------------------------------------------------------------------------------------//
+
+//-> FUNCION DESCARGAR GIF
 async function descargarGif(gifImg, gifNombre) {
     let blob = await fetch(gifImg).then( img => img.blob());;
     invokeSaveAsDialog(blob, gifNombre + ".gif");
 }
 
-//FUNCION MAXIMIZAR GIF mobile
+//--------------------------------------------------------------------------------------------------------------------------//
+
+//-> MAXI GIF mobile
 function maxGifMobileFav(img, id, slug, user, title) {
     if (window.matchMedia("(max-width: 1023px)").matches) {
         modalMobileFav.style.display = "block";
@@ -124,18 +128,22 @@ function maxGifMobileFav(img, id, slug, user, title) {
     }
 }
 
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
 function cerrarModalMobileFav() {
     modalMobileFav.style.display = "none";
 } 
+
+//------------------------------------------------------------------------------------//
 
 function borrarFavMaxMob(gif){
     let iconNoFavMaxMob = document.getElementById('icon-borrar-fav-max-mobile-' + gif);
     iconNoFavMaxMob.setAttribute("src", "./assets/icon-fav-hover.svg");
     borrarFav(gif);
 }
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
-
-//MAXIMIZAR GIF DESKTOP
+//-> MAXIMIZAR GIF DESKTOP
 function maxGifDesktopFav(img, id, slug, user, title){
     if (window.matchMedia("(min-width: 1023px)").matches){
         modalDesktopFav.style.display = "block";
@@ -159,9 +167,14 @@ function maxGifDesktopFav(img, id, slug, user, title){
     }
 }
 
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
 function cerrarModalDesktopFav() {
     modalDesktopFav.style.display = "none";
 } 
+
+//--------------------------------------------------------------------------------------------------------------------------//
+
 
 function borrarFavMax(gif){
     let iconNoFavMax = document.getElementById('icon-borrar-fav-max-' + gif);

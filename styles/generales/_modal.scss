@@ -1,4 +1,7 @@
-//modal maximizar gif
+  //-------------------------//
+ //MODAL PARA MAXIMIZAR GIF//
+//-------------------------//
+
 .modal-activado {
     position: fixed;
     padding: 0 20px;
@@ -13,7 +16,7 @@
     .modal-btn-close{
         background-color: unset;
         border: 0;
-        position: absolute;
+        position: absolute;  
         width: 24px;
         height: 24px;
         top: 50px;

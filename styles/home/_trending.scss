@@ -1,4 +1,4 @@
-//estilos seccion fija de trendig gifos
+//SECCION FIJA DE TRENDING GIFOS
 .trending {
     margin-top: 79px;
     background-color: $gris-claro;
@@ -26,7 +26,7 @@
 }
 
 .trending-slider {
-    //contenedor de los gif
+    //DIV CON LOS GIF
     display: flex;
     margin: 23px auto 0 auto;
 
@@ -39,7 +39,6 @@
 }
 
 .gif-contenedor {
-    //cajita del gif
     width: 100%;
     height: 100%;
     margin: 0 20px;
@@ -51,7 +50,7 @@
 }
 
 .trending-gif {
-    //esta clase va separada para poder aplicarla a los gif que traiga desde la api
+    //ESTA CLASE VA SEPARADA PARA PODER APLICARLA A LOS GIF QUE TRAIGA DESDE LA API
     width: 243px;
     height: 100%;
     object-fit: cover;
@@ -224,7 +223,7 @@
 }
 
 @media screen and (min-width: 1440px) {
-    //estilos seccion fija de trendig gifs
+    //SECCION FIJA DE TRENDING GIF
     .trending {
         padding: 0;
 
@@ -268,7 +267,7 @@
     }
 
     .trending-gif {
-        //esta clase va separada para poder aplicarla a los gif que traiga desde la api
+        //ESTA CLASE VA SEPARADA PARA PODER APLICARLA A LOS GIF QUE TRAIGA DESDE LA API
         width: 357px;
     }
 }

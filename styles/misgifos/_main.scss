@@ -1,4 +1,4 @@
-.header-favoritos {
+.header-misgifos {
     margin-top: 5px;
     text-align: center;
 
@@ -14,7 +14,7 @@
     }
 }
 
-#favoritos-vacio {
+#misgifos-vacio {
     text-align: center;
     margin-top: 40px;
     display: none;
@@ -33,12 +33,13 @@
     }
 }
 
-#gifos-favoritos {
+#misgifos-creados {
     margin-top: 20px;
     text-align: center;
 }
 
-.resultados-favoritos { //el contenedor con las 4 columnas
+.resultados-misgifos {
+    //EL CONTENEDOR CON LAS 4 COLUMNAS
     margin: 38px 10px 53px 10px;
     display: flex;
     flex-wrap: wrap;
@@ -46,44 +47,44 @@
     justify-content: center;
 }
 
-.resultados-gif-box-fav { //la caja con cada gif
+.resultados-gif-box-misgifos {
+    //EL DIV CON CADA GIF
     width: 156px;
-    height: 120px; 
+    height: 120px;
     overflow: hidden;
     margin: 0 10px 25px 10px;
 }
 
-.gif-acciones-resultados-fav {
+.gif-acciones-resultados-misgifos {
     display: none;
 }
 
-@media screen and (min-width:1024px) {
-
-    .header-favoritos {
+@media screen and (min-width: 1024px) {
+    .header-misgifos {
         margin-top: 11px;
-           h1 {
-               font-size: 25px;
-               
-           }
-       }
-       
-       #favoritos-vacio {
-           margin-top: 110px;
-           margin-bottom: 136px;
-       
-           img {
-               width: 150px;
-           }
-       
-           h3 {
-               font-size: 22px;
-               line-height: 33px;
-               margin-top: 24px;
-               padding: 0 52px;
-           }
-       }
+        h1 {
+            font-size: 25px;
+        }
+    }
+ 
+    #misgifos-vacio {
+        margin-top: 110px;
+        margin-bottom: 136px;
 
-    .resultados-favoritos { //el contenedor con las 4 columnas
+        img {
+            width: 150px;
+        }
+
+        h3 {
+            font-size: 22px;
+            line-height: 33px;
+            margin-top: 24px;
+            padding: 0 50px;
+        }
+    }
+
+    .resultados-misgifos {
+        //EL CONTENEDOR CON LAS 4 COLUMNAS
         margin: 38px 10px 53px 10px;
         display: flex;
         flex-wrap: wrap;
@@ -91,13 +92,14 @@
         justify-content: center;
     }
 
-    .resultados-gif-box-fav { //la caja con cada gif
+    .resultados-gif-box-misgifos {
+        //EL DIV CON CADA GIF
         width: 220px;
-        height: 200px; 
+        height: 200px;
         margin: 0 10px 25px 10px;
     }
 
-    .gif-acciones-resultados-fav {
+    .gif-acciones-resultados-misgifos {
         position: absolute;
         z-index: 0;
         background-color: $violeta-op2;
@@ -123,8 +125,7 @@
         border: none;
     }
 
-    .favorito-fav {
-        //background-color: $blanco;
+    .borrar {
         cursor: pointer;
     }
 
@@ -142,13 +143,13 @@
         background-color: $blanco;
     }
 
-    .textos-descripcion-gif-favoritos {
+    .textos-descripcion-gif-misgifos {
         position: absolute;
         bottom: 30px;
         left: 18px;
     }
 
-    .user-gif-favoritos {
+    .user-gif-misgifos {
         @include textos-mobile;
         text-align: left;
         color: $blanco;
@@ -158,8 +159,8 @@
         padding: 0;
         margin-bottom: 6px;
     }
-    
-    .titulo-gif-favoritos {
+
+    .titulo-gif-misgifos {
         @include textos-mobile;
         text-align: left;
         color: $blanco;
@@ -170,30 +171,27 @@
         margin: 0;
     }
 
-    .resultados-gif-box-fav:hover .gif-acciones-resultados-fav {
+    .resultados-gif-box-misgifos:hover .gif-acciones-resultados-misgifos {
         display: block;
     }
 }
 
-
 @media screen and (min-width: 1440px) {
-
-    .resultados-favoritos {
+    .resultados-misgifos {
         margin: 59px 146px 47px 146px;
     }
 
-    .resultados-gif-box-fav {
+    .resultados-gif-box-misgifos {
         width: 260px;
         height: 200px;
         margin: 0 15px 31px 15px;
     }
 
-    .gif-acciones-resultados-fav {
+    .gif-acciones-resultados-misgifos {
         position: absolute;
         z-index: 0;
         background-color: $violeta-op2;
         width: 260px;
         height: 200px;
     }
-
 }

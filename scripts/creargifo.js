@@ -1,23 +1,9 @@
-/*
 
-DESCRIPCIÓN:
+//-------------------------------------------//
+apiKey = "3TLFwkYY15OWVTzFkR6qwsEkd3OqtGPZ";
+//-------------------------------------------//
 
-1- Hago click en comenzar y cambia el texto de la pantalla y pide permiso.
-
-2- Cuando accedo aparece la cámara y el boton GRABAR.
-
-3- Hago click en el boton GRABAR: comienza la grabación del gif, el boton cambia a FINALIZAR, aparece el contador de seg.
-
-4- Click FINALIZAR: boton cambia para SUBIR el GIFO, el contador se va y aparece "repetir captura".
-
-5- click SUBIR GIFO: aparece icono cargando y texto. 
-
-6- GIFO subido con exito: cambia icono y texto del overlay, aparecen los botones para descargar o el link.
-
-*/
-
-apiKey = "QEiNwRIV3GcWQ83yvX6IVcIAST0hxr1n";
-
+//->VARIABLES<-//
 let btnComenzar = document.getElementById('btn-creargifo-comenzar');
 let btnGrabar = document.getElementById('btn-creargifo-grabar');
 let btnFinalizar = document.getElementById('btn-creargifo-finalizar');
@@ -43,9 +29,11 @@ let misGifosString = localStorage.getItem("misGifos");
 
 let video = document.getElementById('grabacion-video');
 let gifGrabado = document.getElementById('gif-grabado');
+//--------------------------------------------------------------------------------------------------------------------------//
 
 
-//1: clickeo COMENZAR, se cambia el texto de la pantalla y se pide el permiso. paso 1 activo
+//1-> //HAGO CLICK EN COMENZAR Y CAMBIA EL TEXTO EN LA PANTALLA//
+
 btnComenzar.addEventListener('click', comenzarGifo);
 
 function comenzarGifo() {
@@ -59,12 +47,12 @@ function comenzarGifo() {
 
     pasoActivo[0].classList.add('paso-activo');
 
-    //funcion pedir permisos camara
+    //->FUNCION PERMISOS
     navigator.mediaDevices.getUserMedia({ audio: false, video: { width: 480, height: 320 } })
 
-        //doy acceso: aparece la camara y el boton GRABAR. paso 2 activo
-        .then(function (mediaStream) {
-            //borro el texto
+    //2-> CUANDO ACCEDO APARECE LA CÁMARA Y EL BOTÓN GRABAR.
+    .then(function (mediaStream) {
+        
             tituloGrabar.style.display = "none";
             textoGrabar.style.display = "none";
             btnGrabar.style.display = "block";
@@ -72,7 +60,7 @@ function comenzarGifo() {
             pasoActivo[0].classList.remove('paso-activo');
             pasoActivo[1].classList.add('paso-activo');
 
-            //aparece el video
+            //->APARACE EL VIDEO
             video.style.display = "block";
             video.srcObject = mediaStream;
             video.onloadedmetadata = function (e) {
@@ -88,8 +76,10 @@ function comenzarGifo() {
 }
 
 
+//--------------------------------------------------------------------------------------------------------------------------//
 
-//3: clickeo el boton GRABAR: comienza la grabacion del gif, el boton cambia a FINALIZAR, aparece el contador de segundos
+//3-> Cuando hago click en el boton GRABAR: COMIENZA LA GRABACION DEL GIF Y EL BOTON CAMBIA A FINALIZAR (aparece el contador de seg).
+
 btnGrabar.addEventListener('click', grabarGifo);
 
 function grabarGifo() {
@@ -115,8 +105,9 @@ function grabarGifo() {
     })();
 }
 
+//--------------------------------------------------------------------------------------------------------------------------//
 
-//4: clickeo FINALIZAR: boton cambia a SUBIR GIFO, el contador se va y aparece "repetir captura"
+//4-> Click en FINALIZAR: boton cambia a SUBIR GIFO y aparece "repetir captura"
 
 btnFinalizar.addEventListener('click', finalizarGifo);
 
@@ -143,14 +134,16 @@ function finalizarGifo() {
 
 }
 
+//--------------------------------------------------------------------------------------------------------------------------//
 
 
-//5: clickeo SUBIR GIFO: aparece overlay con icono loading y texto. paso 3 activo
+//5-> click en SUBIR GIFO: aparece el icono cargando y el texto. 
+
 btnSubirGifo.addEventListener('click', subirGifo);
 
 function subirGifo() {
 
-    //muestro pantalla cargando y paso activo
+    //-> MUESTRO PANTALLA CARGANDO Y PASO ACTIVO
     overlayCargando.style.display = "flex";
     btnSubirGifo.style.display = "none";
     pasoActivo[1].classList.remove('paso-activo');
@@ -166,12 +159,13 @@ function subirGifo() {
             return response.json();
         })
 
-        //6: gifo subido con exito: cambia icono y texto del overlay, aparecen los botones para descargar o link
+        //6- GIFO subido con exito: CAMBIA EL ICONO, TEXTO OVERLAY Y APARECEN LOS BOTONES PARA DESCARGAR O EL LINK
+
         .then(objeto => {
             console.log(objeto);
             let miGifId = objeto.data.id;
 
-            //muestro elementos del DOM subiendo gifo
+            //-> ELEMENTOS DEL DOM SUBIENDO GIFO
             accionesCargando.style.display = "block";
             iconoCargando.setAttribute("src", "./assets/check.svg");
             textoCargando.innerText = "GIFO subido con éxito";
@@ -184,17 +178,16 @@ function subirGifo() {
                 </button>
                 `;
 
-            //si en el local storage no hay nada, el array queda vacio
+            //-> SI NO HAY NADA EN EL LOCALSTORAGE, EL ARRAY QUEDA VACIO//
             if (misGifosString == null) {
                 misGifosArray = [];
 
             } else {
-                //si tengo contenido, necesito parsearlo para agregar uno nuevo
                 misGifosArray = JSON.parse(misGifosString);
             }
 
             misGifosArray.push(miGifId);
-            //vuelvo a pasar a texto el array para subirlo al LS
+            //-> VUELVO A PASAR EL ARRAY A TEXTO PARA SUBIRLO AL LOCALSTORAGE 
             misGifosString = JSON.stringify(misGifosArray);
             localStorage.setItem("misGifos", misGifosString);
         })
@@ -202,13 +195,15 @@ function subirGifo() {
         .catch(error => console.log("error al subir gif a GIPHY" + error))
 }
 
-//FUNCION DESCARGAR GIF
+//--------------------------------------------------------------------------------------------------------------------------//
+
+//-> FUNCION DESCARGAR GIF
 async function descargarGifCreado(gifImg) {
     let blob = await fetch(gifImg).then( img => img.blob());;
     invokeSaveAsDialog(blob, "migifo.gif");
 }
 
-//- repetir captura: funcion grabar
+//-> FUNCION GRABAR - REPETIR CAPTURA
 repetirCaptura.addEventListener('click', repetirGifo);
 
 function repetirGifo() {
@@ -217,23 +212,23 @@ function repetirGifo() {
 
     repetirCaptura.style.display = "none";
 
-    //sacar boton subir gifo
+    //SACAR BOTON SUBIR GIFO
     btnSubirGifo.style.display = "none";
 
-    //se va la imagen
+    //SALE LA IMAGEN
     gifGrabado.style.display = "none";
 
-    //funciones comenzar gifo pero sin texto
-    //aparece boton grabar gifo
+    
+    //APARECE BOTON GRABAR
     btnGrabar.style.display = "block";
 
-    //funcion pedir permisos camara
+    //PERMISOS DE LA CÁMARA
     navigator.mediaDevices.getUserMedia({ audio: false, video: { width: 480, height: 320 } })
 
-        //doy acceso: aparece la camara y el boton GRABAR. paso 2 activo
+        //-> CUANDO DOY ACCESO: aparece la camara y el boton GRABAR.
         .then(function (mediaStream) {
 
-            //aparece el video
+            //-> APARECE EL VIDEO
             video.style.display = "block";
             video.srcObject = mediaStream;
             video.onloadedmetadata = function (e) {
@@ -246,7 +241,10 @@ function repetirGifo() {
         })
 }
 
-//funcion para calcular el tiempo
+
+//--------------------------------------------------------------------------------------------------------------------------//
+
+//-> CALCULADOR DEL TIEMPO
 function calculateTimeDuration(secs) {
     var hr = Math.floor(secs / 3600);
     var min = Math.floor((secs - (hr * 3600)) / 60);

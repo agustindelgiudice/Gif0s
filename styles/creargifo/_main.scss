@@ -110,7 +110,6 @@
                         position: relative;
 
                         #titulo-grabargifo {
-                            //display: none;
                             @include titulos;
                             font-size: 25px;
                             line-height: 35px;
@@ -367,7 +366,7 @@
         }
 
         .divisor-creargifo {   
-            width: 795px;/*  */
+            width: 795px;
         }
     }
 }

@@ -7,24 +7,22 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="./estilos/estilos.css">
+    <link rel="stylesheet" href="./styles/styles.css">
+    <link rel="stylesheet" href="./styles/navbar.css">
     <title>GIFOS</title>
 </head>
 
 <body id="body">
 
     <header>
-
-        <div class="linea-violeta"></div>
-
+        <div class="renglon-violeta"></div>
         <div class="navbar">
-
             <img src="./assets/logo-mobile.svg" alt="Logo GifOs" id="logo">
             <img src="./assets/logo-desktop.svg" alt="Logo GifOs" id="logo-desktop">
 
             <nav>
                 <div class="menu">
-                    <input type="checkbox" id="checkbox"/>
+                    <input type="checkbox" id="checkbox" />
 
                     <label for="checkbox" id="icon-hamburguesa">
                         <span class="span1"></span>
@@ -44,46 +42,27 @@
                     </ul>
                 </div>
             </nav>
-
         </div>
-
     </header>
-
     <main>
-
         <section class="header-favoritos">
-
             <img src="./assets/icon-favoritos.svg" alt="favoritos">
-
             <h1>Favoritos</h1>
-
         </section>
-
         <section id="favoritos-vacio">
-
             <img src="./assets/icon-mis-gifos-sin-contenido.svg" alt="favoritos sin contenido">
             <h3>¡Guardá tu primer GIFO en favoritos para que se muestre aquí!</h3>
-
         </section>
-
         <section id="gifos-favoritos">
-
             <div class="resultados-favoritos" id="resultados-favoritos">
-
-                
-            </div> 
-
-            
-
+            </div>
         </section>
 
         <section class="trending">
-
             <h2>Trending GIFOS</h2>
             <p class="trending-text">Mira los últimos GIFOS de nuestra comunidad.</p>
 
             <div class="trending-slider-contenedor">
-
                 <div class="slider-prev" id="trending-btn-previous">
                     <img src="./assets/button-left.svg" alt="izquierda" class="prev-violeta">
                     <img src="./assets/button-left-blanco.svg" alt="izquierda" class="prev-blanco">
@@ -98,17 +77,13 @@
                     <img src="./assets/button-right.svg" alt="derecha" class="next-violeta">
                     <img src="./assets/button-right-blanco.svg" alt="derecha" class="next-blanco">
                 </div>
-
             </div>
-
         </section>
-
     </main>
 
+
     <footer>
-
         <div class="datos">
-
             <div class="footer-redes">
                 <p>Compartir en:</p>
                 <div class="redes-iconos-contenedor">
@@ -133,17 +108,13 @@
             <div class="footer-copyright">
                 <p>© GIFOS 2020 All Rights Reserved.</p>
             </div>
-
         </div>
-        <div class="linea-violeta"></div>
-
+        <div class="renglon-violeta"></div>
     </footer>
 
     <script src="https://www.WebRTC-Experiment.com/RecordRTC.js"></script>
     <script src="./scripts/favoritos.js"></script>
     <script src="./scripts/trending-slide.js"></script>
     <script src="./scripts/modo-nocturno.js"></script>
-   
 </body>
-
 </html>

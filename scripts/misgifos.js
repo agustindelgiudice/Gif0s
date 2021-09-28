@@ -1,30 +1,38 @@
-////// API KEY: 
-apiKey = "QEiNwRIV3GcWQ83yvX6IVcIAST0hxr1n";
-//offsetBusqueda = 0;
+//----------------------------------------//
+apiKey = "3TLFwkYY15OWVTzFkR6qwsEkd3OqtGPZ";
+//----------------------------------------//
 
-misGifosArray = [];
+//------------------------------------------------------------------------//
+
+misGifosArray = []; //ARRAY DONDE SE VAN AGREGANDO LOS GIFOS
 misGifosString = localStorage.getItem("misGifos");
 
+//------------------------------------------------------------------------//
+
+//->VARIABLES<-//
 let pantallaMisGifos = document.getElementById('resultados-misgifos');
 
 let modalMobileMG = document.createElement("div");
 let modalDesktopMG = document.createElement("div");
+//------------------------------------------------------------------------//
 
 buscarMisGifos();
 
-//funciones para mostrar mis gifos en la pagina
-function buscarMisGifos() {
+//-> LAS FUNCIONES QUE MUESTRAN MIS GIFOS EN LA PÁGINA
+    
+    function buscarMisGifos() {
     let pantallaMisGifosVacio = document.getElementById('misgifos-vacio');
 
     if (misGifosString == null || misGifosString == "[]") {
-        //1. si no tengo gif creados, muestro la pantalla mis gifos vacia
+        
+        //MUESTRO LA PANTALLA MIS GIFOS VACIA, SI NO TENGO GIF CREADOS
+
         pantallaMisGifosVacio.style.display = "block";
         pantallaMisGifos.style.display = "none";
  
     } else {
         misGifosArray = JSON.parse(misGifosString);
         let urlMisGifos = `https://api.giphy.com/v1/gifs?ids=${misGifosArray.toString()}&api_key=${apiKey}`;
-        //console.log(urlMisGifos);
 
         fetch(urlMisGifos)
             .then(response => response.json())
@@ -38,6 +46,8 @@ function buscarMisGifos() {
             })
     }
 }
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
 function mostrarMisGifos(content) {
     let gifosMisGifosArray = content.data;
@@ -68,7 +78,11 @@ function mostrarMisGifos(content) {
     }
 }
 
-//FUNCION BORRAR GIF
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+
+//-> FUNCION BORRAR GIF
+
 function borrarGifo(gif){
     let arrayAuxGifos = [];
     arrayAuxGifos = JSON.parse(misGifosString);
@@ -85,15 +99,19 @@ function borrarGifo(gif){
     location.reload();
 }
 
+//------------------------------------------------------------------------------------------------//
 
 
-//FUNCION DESCARGAR GIF
+//-> FUNCION DESCARGAR GIF
+
 async function descargarGif(gifImg, gifNombre) {
     let blob = await fetch(gifImg).then(img => img.blob());;
     invokeSaveAsDialog(blob, gifNombre + ".gif");
 }
+//------------------------------------------------------------------------------------------------//
 
-//FUNCION MAXIMIZAR GIF mobile
+//-> FUNCION MAXIMIZAR GIF mobile
+
 function maxGifMobileMG(img, id, slug, user, title) {
     if (window.matchMedia("(max-width: 1023px)").matches) {
         modalMobileMG.style.display = "block";
@@ -116,12 +134,14 @@ function maxGifMobileMG(img, id, slug, user, title) {
         document.body.appendChild(modalMobileMG);
     }
 }
+//--------------------------------------------------------------------------------------------------------------------------------------//
 
 function cerrarModalMobileMG() {
     modalMobileMG.style.display = "none";
 }
+//--------------------------------------------------------------------------------------------------------------------------------------//
 
-//FUNCION MAXIMIZAR DESKTOP
+//-> FUNCION MAXIMIZAR DESKTOP
 function maxGifDesktopMG(img, id, slug, user, title) {
     if (window.matchMedia("(min-width: 1023px)").matches) {
         modalDesktopMG.style.display = "block";
@@ -144,6 +164,7 @@ function maxGifDesktopMG(img, id, slug, user, title) {
         document.body.appendChild(modalDesktopMG);
     }
 }
+//---------------------------------------------------------------------------------------------------------------------------------------------//
 
 function cerrarModalDesktopMG() {
     modalDesktopMG.style.display = "none";

@@ -1,4 +1,4 @@
-//estilos seccion busqueda (ilustracion, buscador y trending topics)
+//ESTILOS SECCION BUSQUEDA
 
 .main-header {
     h1 {
@@ -80,7 +80,8 @@
     }
 }
 
-//clases definidas para el buscador abierto
+//CLASES DEFINIDAS PARA EL BUSCADOR ABIERTO
+
 .buscador-activo {
     border: 1px solid $violeta;
     border-radius: 27px;
@@ -157,7 +158,8 @@
     }
 }
 
-//estilos del parrafo trending topics
+//ESTILOS DEL PARRAFO TRENDING TOPICS
+
 .trending-sugerencias {
     margin-top: 31px;
 
@@ -183,7 +185,6 @@
 
 //estilos de la seccion RESULTADOS BUSQUEDA agregada con js
 .resultados-busqueda-contenedor {
-    //la seccion entera con titulo
     display: none;
     position: relative;
     margin-top: 35px;
@@ -210,7 +211,7 @@
 }
 
 .resultados-busqueda {
-    //el contenedor con las 4 columnas
+    //EL CONTENEDOR CON LAS 4 COLUMNAS
     margin: 38px 10px 53px 10px;
     display: flex;
     flex-wrap: wrap;
@@ -219,7 +220,7 @@
 }
 
 .resultados-gif-box {
-    //la caja con cada gif
+    //EL DIV CON CADA GIF
     width: 156px;
     height: 120px;
     overflow: hidden;
@@ -275,7 +276,7 @@
     }
 
     .resultados-busqueda {
-        //el contenedor con las 4 columnas
+        //EL CONTENEDOR CON LAS 4 COLUMNAS
         margin: 38px 10px 53px 10px;
         display: flex;
         flex-wrap: wrap;
@@ -284,7 +285,7 @@
     }
 
     .resultados-gif-box {
-        //la caja con cada gif
+        //EL DIV CON CADA GIF
         width: 220px;
         height: 200px;
         margin: 0 10px 25px 10px;
@@ -405,7 +406,7 @@
         }
     }
 
-    //clases definidas para el buscador abierto
+    //CLASES PARA EL BUSCADOR ABIERTO
     .buscador-activo {
         width: 551px;
     }

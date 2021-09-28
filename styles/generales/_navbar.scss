@@ -1,12 +1,16 @@
-//menu mobile
-.linea-violeta {
+  //-------//
+ //MOBILE//
+//------//
+
+
+.renglon-violeta {
     height: 5px;
     background-color: $violeta;
     width: 100%;
 }
 
 .dark {
-    .linea-violeta{
+    .renglon-violeta{
         background-color: $negro;
     }
 }
@@ -113,7 +117,6 @@ header {
                     }
                 }
 
-                /* lo que pasa cuando apreto el checkbox*/
 
                 input:checked ~ ul {
                     width: 100%;
@@ -140,7 +143,7 @@ header {
     }
 }
 
-//menu desktop
+//MENU DESKTOP
 @media screen and (min-width: 1024px) {
     header {
         .navbar {

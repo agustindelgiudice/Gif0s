@@ -1,4 +1,6 @@
 
+//->VARIABLES - DARK MODE<-//
+
 let body = document.getElementById('body');
 let url = window.location.pathname;
 let darkModeStorage = localStorage.getItem("darkMode");
@@ -9,29 +11,32 @@ let darkModeActivado = () => {
     body.classList.add('body-dark');
     darkModeBtn.innerHTML = "Modo diurno";
 
-  
+//------------------------------------------------------------------------------------------------//
 
-    //home
+
+    //-> HOME
     if (url === "/index.html" || url === "/gifos/index.html") {
-        //funcion cambiar icono lupa violeta
+        //FUNCION PARA CAMBIAR EL ICONO DE LA LUPA VIOLETA
         cambioIconosBusqueda();
     }
 
-    //crear gifos
+    //-> CREAR GIFOS
     if (url === "/creargifo.html" || url === "/gifos/creargifo.html") {
-        //funcion cambiar imagenes camaras
+        
+        //FUNCION CAMBIO CAMARAS
         cambioCamaras();
     }
 
     localStorage.setItem("darkMode", null);
 }
-
-//chequeo cuando cargo la pagina el estado del LStorage
+//------------------------------------------------------------------------------------------------//
+//MIRO CUANDO CARGO LA PAGINA EL ESTADO DEL localStorage
 if (darkModeStorage === "activado") {
     darkModeActivado();
 }
+//------------------------------------------------------------------------------------------------//
 
-//funcion para cambiar el mode
+//-> FUNCION CAMBIO MODE
 function cambioMode() {
     darkModeStorage = localStorage.getItem("darkMode");
 
@@ -42,10 +47,10 @@ function cambioMode() {
     }
 }
 
+//------------------------------------------------------------------------------------------------//
 
+//-> FUNCIONES AGREGADAS PARA CAMBIAR SRC DE IMG O ICONOS
 
-
-//funciones adicionales para cambiar src de imagenes, iconos
 function cambioLogos() {
     let logoMobile = document.getElementById('logo');
     let logoDesktop = document.getElementById('logo-desktop');

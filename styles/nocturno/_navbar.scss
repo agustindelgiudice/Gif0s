@@ -1,4 +1,4 @@
-//menu mobile
+//MENU MOBILE
 
 .body-dark {
     background-color: $gris-oscuro;
@@ -33,8 +33,6 @@
                         }
                     }
 
-                    /* lo que pasa cuando apreto el checkbox*/
-
                     input:checked ~ label span {
                         background-color: $blanco;
                     }
@@ -46,7 +44,7 @@
     }
 }
 
-//menu desktop
+//MENU DESKTOP
 @media screen and (min-width: 1024px) {
     .body-dark {
 
